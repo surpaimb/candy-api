@@ -14,22 +14,22 @@ class CurrencyTableSeeder extends Seeder
      */
     public function run()
     {
+
         Currency::ForceCreate([
             'code' => 'GBP',
             'name' => 'British Pound',
             'enabled' => true,
-            'exchange_rate' => 1,
+            'exchange_rate' => 10,
             'format' => '&#xa3;{price}',
             'decimal_point' => '.',
-            'thousand_point' => ',',
-            'default' => true,
+            'thousand_point' => ','
         ]);
 
         Currency::ForceCreate([
             'code' => 'EUR',
             'name' => 'Euro',
             'enabled' => true,
-            'exchange_rate' => 0.87260,
+            'exchange_rate' => 8.7260,
             'format' => '&euro;{price}',
             'decimal_point' => '.',
             'thousand_point' => ',',
@@ -39,7 +39,7 @@ class CurrencyTableSeeder extends Seeder
             'code' => 'USD',
             'name' => 'US Dollars',
             'enabled' => true,
-            'exchange_rate' => 0.71,
+            'exchange_rate' => 7.1,
             'format' => '&euro;{price}',
             'decimal_point' => '.',
             'thousand_point' => ',',

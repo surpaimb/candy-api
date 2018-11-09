@@ -56,7 +56,7 @@ class ModifyOrdersAndLines extends Migration
             $table->integer('discount_total')->unsigned()->default(0)->after('unit_price');
             $table->integer('tax_total')->unsigned()->default(0)->after('discount_total');
             $table->integer('tax_rate')->unsigned()->default(0)->after('tax_total');
-            $table->softDeletes();
+//            $table->softDeletes();
         });
 
         Schema::table('order_lines', function (Blueprint $table) {

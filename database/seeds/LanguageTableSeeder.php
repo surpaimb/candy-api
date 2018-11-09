@@ -18,14 +18,8 @@ class LanguageTableSeeder extends Seeder
             'lang' => 'en',
             'iso' => 'gb',
             'name' => 'English',
-            'default' => true,
-        ]);
-
-        Language::forceCreate([
-            'lang' => 'fr',
-            'iso' => 'fr',
-            'name' => 'Français',
             'default' => false,
         ]);
+
     }
 }

@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder
             'id' => 2,
             'name' => 'Alec',
             'email' => 'hello@itsalec.co.uk',
-            'password' => \Hash::make('password'),
+            'password' => \Hash::make('111222'),
         ]);
 
         UserDetail::forceCreate([
@@ -38,7 +38,7 @@ class UserTableSeeder extends Seeder
             'id' => 7,
             'name' => 'Shaun',
             'email' => 'shaun@neondigital.co.uk',
-            'password' => \Hash::make('password'),
+            'password' => \Hash::make('111222'),
         ]);
         UserDetail::forceCreate([
             'user_id' => $customer->id,

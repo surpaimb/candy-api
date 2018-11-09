@@ -71,7 +71,7 @@ class InstallGetCandyCommand extends Command
             ['Username / Email', $this->user->email],
             ['Password', '[hidden]'],
             ['CMS Login', route('hub.login')],
-            ['API URL', url('api/'.config('app.api_version', 'v1'))],
+            ['API URL', url('api'.config('app.api_version', '/'))],
             ['CMS Docs', 'https://getcandy.io/documentation/hub'],
             ['CMS Docs', 'https://getcandy.io/documentation/api'],
             ['OAuth Client ID', $client->id],
@@ -215,16 +215,16 @@ class InstallGetCandyCommand extends Command
         $this->info('Adding base languages');
 
         Language::create([
-            'lang' => 'en',
-            'iso' => 'gb',
-            'name' => 'English',
+            'lang' => 'zh',
+            'iso' => 'cn',
+            'name' => 'Chinese',
             'default' => true,
         ]);
 
         $this->info('Adding VAT...');
 
         Tax::create([
-            'percentage' => 20,
+            'percentage' => 16,
             'name' => 'VAT',
             'default' => true,
         ]);
@@ -238,7 +238,7 @@ class InstallGetCandyCommand extends Command
         ]);
 
         $attribute = new Attribute();
-        $attribute->name = ['en' => 'Name', 'sv' => 'Namn'];
+        $attribute->name = ['en' => 'Name', 'zh' => '姓名'];
         $attribute->handle = 'name';
         $attribute->position = 1;
         $attribute->group_id = $group->id;
@@ -278,7 +278,7 @@ class InstallGetCandyCommand extends Command
         // ]);
 
         $group = AttributeGroup::forceCreate([
-            'name' => ['en' => 'SEO', 'sv' => 'SEO'],
+            'name' => ['en' => 'SEO', 'zh' => 'SEO'],
             'handle' => 'seo',
             'position' => 3,
         ]);
@@ -361,35 +361,15 @@ class InstallGetCandyCommand extends Command
 
         $this->info('Adding some currencies');
 
-        Currency::create([
-            'code' => 'GBP',
-            'name' => 'British Pound',
+        Currency::ForceCreate([
+            'code' => 'CNY',
+            'name' => 'China Yuan',
             'enabled' => true,
             'exchange_rate' => 1,
-            'format' => '&#xa3;{price}',
+            'format' => '&yen;{price}',
             'decimal_point' => '.',
             'thousand_point' => ',',
             'default' => true,
-        ]);
-
-        Currency::create([
-            'code' => 'EUR',
-            'name' => 'Euro',
-            'enabled' => true,
-            'exchange_rate' => 0.87260,
-            'format' => '&euro;{price}',
-            'decimal_point' => '.',
-            'thousand_point' => ',',
-        ]);
-
-        Currency::create([
-            'code' => 'USD',
-            'name' => 'US Dollars',
-            'enabled' => true,
-            'exchange_rate' => 0.71,
-            'format' => '${price}',
-            'decimal_point' => '.',
-            'thousand_point' => ',',
         ]);
 
         $this->info('Initialising Assets');
