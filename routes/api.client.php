@@ -1,5 +1,4 @@
 <?php
-
 Route::group([
     'middleware' => [
         'api.client',
@@ -8,10 +7,9 @@ Route::group([
         'api.locale',
         'api.tax',
     ],
-    'prefix' => 'api/'.config('app.api_version', 'v1'),
+    'prefix' => 'api'.config('app.api_version', '/'),
     'namespace' => 'GetCandy\Api\Http\Controllers',
 ], function ($router) {
-
     // Address Route
     $router->delete('addresses/{id}', 'Addresses\AddressController@destroy');
     $router->put('addresses/{id}', 'Addresses\AddressController@update');
@@ -33,7 +31,6 @@ Route::group([
     $router->get('products/{product}', 'Products\ProductController@show');
     $router->post('customers', 'Customers\CustomerController@store');
     $router->get('products', 'Products\ProductController@index');
-
     /*
      * Baskets
      */
@@ -45,35 +42,29 @@ Route::group([
     $router->resource('baskets', 'Baskets\BasketController', [
         'except' => ['edit', 'create', 'destroy', 'update'],
     ]);
-
     /*
      * Categories
      */
     $router->get('categories', 'Categories\CategoryController@index');
-
     /*
      * Countries
      */
     $router->get('countries', 'Countries\CountryController@index');
-
     /*
      * Currencies
      */
     $router->resource('currencies', 'Currencies\CurrencyController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Customers
      */
     $router->resource('customers', 'Customers\CustomerController', [
         'except' => ['index', 'edit', 'create', 'show'],
     ]);
-
     /*
      * Orders
      */
-
     $router->post('orders/process', 'Orders\OrderController@process');
     $router->post('orders/{id}/expire', 'Orders\OrderController@expire');
     $router->put('orders/{id}/shipping/address', 'Orders\OrderController@shippingAddress');
@@ -82,15 +73,12 @@ Route::group([
     $router->put('orders/{id}/shipping/cost', 'Orders\OrderController@shippingCost');
     $router->put('orders/{id}/contact', 'Orders\OrderController@addContact');
     $router->put('orders/{id}/billing/address', 'Orders\OrderController@billingAddress');
-
     $router->post('orders/{id}/lines', 'Orders\OrderLineController@store');
     $router->delete('orders/lines/{id}', 'Orders\OrderLineController@destroy');
-
     $router->resource('orders', 'Orders\OrderController', [
         'only' => ['store', 'show'],
     ]);
     $router->get('orders/{id}/invoice', 'Orders\OrderController@invoice');
-
     /*
      * Payments
      */
@@ -98,25 +86,20 @@ Route::group([
     $router->get('payments/provider', 'Payments\PaymentController@provider');
     $router->get('payments/providers', 'Payments\PaymentController@providers');
     $router->get('payments/types', 'Payments\PaymentTypeController@index');
-
     $router->get('routes', 'Routes\RouteController@index');
     $router->get('routes/{slug}', [
         'uses' => 'Routes\RouteController@show',
     ])->where(['slug' => '.*']);
-
     $router->post('password/reset', 'Auth\ResetPasswordController@reset');
     $router->post('password/reset/request', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-
     $router->get('search', 'Search\SearchController@search');
     $router->get('search/suggest', 'Search\SearchController@suggest');
     $router->get('search/products', 'Search\SearchController@products');
-
     /*
      * Shipping
      */
     $router->get('shipping', 'Shipping\ShippingMethodController@index');
     $router->get('shipping/prices/estimate', 'Shipping\ShippingPriceController@estimate');
-
     $router->post('users', 'Users\UserController@store');
     $router->post('users/{userid}', 'Users\UserController@update');
 });

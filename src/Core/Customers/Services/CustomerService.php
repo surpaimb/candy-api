@@ -36,7 +36,7 @@ class CustomerService extends BaseService
             $user->groups()->sync($groups);
         }
 
-        dd($user);
+//        dd($user);
     }
 
     public function getPaginatedData($length = 50, $page = null, $keywords = null)

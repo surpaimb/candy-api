@@ -23,6 +23,8 @@ class UserTransformer extends BaseTransformer
             'id' => $user->encodedId(),
             'email' => $user->email,
             'name' => $user->name,
+            'phone_number'=> $user->phone_number,
+            'avatar'=> $user->avatar
         ];
     }
 

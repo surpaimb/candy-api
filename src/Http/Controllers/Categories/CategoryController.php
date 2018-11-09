@@ -31,6 +31,7 @@ class CategoryController extends BaseController
         );
 
         return $this->respondWithCollection($collection, new CategoryTransformer);
+
     }
 
     public function show($id)

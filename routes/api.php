@@ -1,11 +1,8 @@
 <?php
-
-
 // Route::middleware()
 //     ->namespace('')
 //     ->prefix($apiPrefix)
 //     ->group(__DIR__ . '../../routes/api.php');
-
 Route::group([
     'middleware' => [
         'auth:api',
@@ -14,33 +11,28 @@ Route::group([
         'api.locale',
         'api.tax',
     ],
-    'prefix' => 'api/'.config('app.api_version', 'v1'),
+    'prefix' => 'api'.config('app.api_version', '/'),
     'namespace' => 'GetCandy\Api\Http\Controllers',
 ], function ($router) {
     $router->post('account/password', [
         'as' => 'account.password.reset',
         'uses' => 'Auth\AccountController@resetPassword',
     ]);
-
     $router->post('addresses', 'Addresses\AddressController@store');
     $router->post('auth/impersonate', [
         'as' => 'auth.impersonate',
         'uses' => 'Auth\ImpersonateController@process',
     ]);
-
     /*
      * Assets
      */
-
     $router->put('assets', 'Assets\AssetController@updateAll');
     $router->resource('assets', 'Assets\AssetController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Associations
      */
-
     $router->get('associations/groups', 'Associations\AssociationGroupController@index');
     /*
      * Attributes
@@ -49,7 +41,6 @@ Route::group([
     $router->resource('attributes', 'Attributes\AttributeController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Attribute Groups
      */
@@ -57,7 +48,6 @@ Route::group([
     $router->resource('attribute-groups', 'Attributes\AttributeGroupController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Baskets
      */
@@ -67,13 +57,11 @@ Route::group([
     $router->post('baskets/{id}/save', 'Baskets\BasketController@save');
     $router->delete('baskets/{basket}', 'Baskets\BasketController@destroy');
     $router->put('baskets/saved/{basket}', 'Baskets\SavedBasketController@update');
-
     /*
      * Payments
      */
     $router->post('payments/{id}/refund', 'Payments\PaymentController@refund');
     $router->post('payments/{id}/void', 'Payments\PaymentController@void');
-
     /*
      * Categories
      */
@@ -82,19 +70,16 @@ Route::group([
     $router->post('categories/{category}/products/attach', 'Products\ProductCategoryController@attach');
     $router->put('categories/{category}/products', 'Categories\CategoryController@putProducts');
     $router->put('categories/{category}/layouts', 'Categories\LayoutController@store');
-
     $router->post('categories/{category}/routes', 'Categories\CategoryRouteController@store');
     $router->resource('categories', 'Categories\CategoryController', [
         'except' => ['index', 'edit', 'create', 'show'],
     ]);
-
     /*
      * Channels
      */
     $router->resource('channels', 'Channels\ChannelController', [
         'except' => ['edit', 'create', 'show'],
     ]);
-
     /*
      * Channels
      */
@@ -103,40 +88,33 @@ Route::group([
     $router->resource('collections', 'Collections\CollectionController', [
         'except' => ['index', 'edit', 'create', 'show'],
     ]);
-
     /*
      * Customers
      */
-
     $router->resource('customers/groups', 'Customers\CustomerGroupController', [
         'except' => ['edit', 'create', 'show'],
     ]);
-
     $router->resource('customers', 'Customers\CustomerController', [
         'except' => ['edit', 'create', 'store'],
     ]);
-
     /*
      * Discounts
      */
     $router->resource('discounts', 'Discounts\DiscountController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Languages
      */
     $router->resource('languages', 'Languages\LanguageController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Layouts
      */
     $router->resource('layouts', 'Layouts\LayoutController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Orders
      */
@@ -145,7 +123,6 @@ Route::group([
     $router->resource('orders', 'Orders\OrderController', [
         'only' => ['index', 'update'],
     ]);
-
     /*
      * Pages
      */
@@ -153,7 +130,6 @@ Route::group([
     $router->resource('pages', 'Pages\PageController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Product variants
      */
@@ -161,7 +137,6 @@ Route::group([
         'except' => ['edit', 'create', 'store'],
     ]);
     $router->post('products/{product}/variants', 'Products\ProductVariantController@store');
-
     /*
      * Products
      */
@@ -178,33 +153,28 @@ Route::group([
     $router->resource('products', 'Products\ProductController', [
         'except' => ['edit', 'create', 'show'],
     ]);
-
     /*
      * Product families
      */
     $router->resource('product-families', 'Products\ProductFamilyController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Routes
      */
     $router->resource('routes', 'Routes\RouteController', [
         'except' => ['index', 'show', 'edit', 'create'],
     ]);
-
     /*
      * Saved search
      */
     $router->post('saved-searches', 'Search\SavedSearchController@store');
     $router->delete('saved-searches/{id}', 'Search\SavedSearchController@destroy');
     $router->get('saved-searches/{type}', 'Search\SavedSearchController@getByType');
-
     /*
      * Settings
      */
     $router->get('settings/{handle}', 'Settings\SettingController@show');
-
     /*
      * Shipping
      */
@@ -220,21 +190,18 @@ Route::group([
     $router->resource('shipping', 'Shipping\ShippingMethodController', [
         'except' => ['index', 'edit', 'create'],
     ]);
-
     /*
      * Tags
      */
     $router->resource('tags', 'Tags\TagController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Taxes
      */
     $router->resource('taxes', 'Taxes\TaxController', [
         'except' => ['edit', 'create'],
     ]);
-
     /*
      * Users
      */
@@ -243,7 +210,6 @@ Route::group([
     $router->resource('users', 'Users\UserController', [
         'except' => ['create', 'store'],
     ]);
-
     /*
      * Account
      */
