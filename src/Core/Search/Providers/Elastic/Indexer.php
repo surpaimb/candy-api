@@ -17,13 +17,13 @@ class Indexer
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->lang = app('api')->languages()->getDefaultRecord();
     }
 
     /**
      * Updates the mapping for a model.
-     *
-     * @param Model $model
-     * @return void
+     * @param $model
+     * @return bool
      */
     public function updateMapping($model)
     {
@@ -95,7 +95,7 @@ class Indexer
      * Reindexes all indexes for a model.
      *
      * @param string $model
-     * @return void
+     * @return boolean
      */
     public function indexAll($model)
     {
@@ -186,7 +186,7 @@ class Indexer
      * Index a single object.
      *
      * @param Model $model
-     * @return void
+     * @return bool
      */
     public function indexObject(Model $model)
     {
@@ -201,9 +201,8 @@ class Indexer
 
     /**
      * Add a single model to the elastic index.
-     *
      * @param Model $model
-     * @param string $suffix
+     * @param null $suffix
      * @return bool
      */
     protected function addToIndex(Model $model, $suffix = null)
@@ -239,7 +238,8 @@ class Indexer
 
     /**
      * Create an index based on the model.
-     * @return void
+     * @param $name
+     * @return \Elastica\Index
      */
     public function createIndex($name)
     {
@@ -249,12 +249,12 @@ class Indexer
                 'analyzer' => [
                     'trigram' => [
                         'type' => 'custom',
-                        'tokenizer' => 'standard',
-                        'filter' => ['standard', 'shingle'],
+                        'tokenizer' => 'ik_max_word',
+                        'filter' => ['ik_max_word', 'shingle'],
                     ],
                     'candy' => [
-                        'tokenizer' => 'standard',
-                        'filter' => ['standard', 'lowercase', 'stop', 'porter_stem'],
+                        'tokenizer' => 'ik_max_word',
+                        'filter' => ['ik_max_word', 'lowercase', 'stop', 'porter_stem'],
                     ],
                 ],
                 'filter' => [

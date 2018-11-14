@@ -31,6 +31,8 @@ class CategoryType extends BaseType
                 ],
                 'name' => [
                     'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
             ],
         ],
@@ -43,6 +45,8 @@ class CategoryType extends BaseType
                 ],
                 'name' => [
                     'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
                 'handle' => [
                     'type' => 'keyword',
@@ -59,6 +63,8 @@ class CategoryType extends BaseType
                 ],
                 'name' => [
                     'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
                 'handle' => [
                     'type' => 'keyword',
@@ -71,11 +77,16 @@ class CategoryType extends BaseType
         ],
         'name' => [
             'type' => 'text',
-            'analyzer' => 'standard',
+            'analyzer' => 'ik_max_word',
+            "search_analyzer"=> "ik_max_word",
             'fields' => [
                 'en' => [
                     'type' => 'text',
                     'analyzer' => 'english',
+                ],
+                'zh' => [
+                    'type' => 'text',
+                    'analyzer' => 'ik_max_word',
                 ],
                 'suggest' => [
                     'type' => 'completion',

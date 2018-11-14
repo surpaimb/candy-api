@@ -190,10 +190,8 @@ class Search implements ClientContract
 
     /**
      * Searches the index.
-     *
-     * @param  string $keywords
-     *
-     * @return array
+     * @param bool $rank
+     * @return \Elastica\ResultSet
      */
     public function search($rank = true)
     {
@@ -212,7 +210,7 @@ class Search implements ClientContract
         }
 
         if (count($this->categories) && empty($this->sorts)) {
-            foreach ($category as $cat) {
+            foreach ($this->categories as $cat) {
                 $builder->addSort(CategorySort::class, $cat);
             }
         }

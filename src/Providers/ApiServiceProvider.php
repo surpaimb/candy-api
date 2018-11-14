@@ -47,7 +47,7 @@ class ApiServiceProvider extends ServiceProvider
         $this->loadTranslations();
         $this->mapValidators();
         $this->publishConfig();
-        $this->mapValidators();
+//        $this->mapValidators();
         $this->mapBindings();
         $this->initPassport();
         $this->registerMiddleware();
@@ -142,9 +142,9 @@ class ApiServiceProvider extends ServiceProvider
             \Alaouy\Youtube\YoutubeServiceProvider::class
         );
 //        //解决循环加载的问题
-//        $this->app->bind(\GetCandy\Api\Shipping\ShippingCalculator::class, function ($app) {
-//            return $app->make(\GetCandy\Api\Shipping\ShippingCalculator::class);
-//        });
+        $this->app->bind(\GetCandy\Api\Core\Shipping\ShippingCalculator::class, function ($app) {
+            return $app->make(\GetCandy\Api\Core\Shipping\ShippingCalculator::class);
+        });
 
         $this->app->singleton(UserContract::class, function ($app) {
             return $app->make(UserService::class);

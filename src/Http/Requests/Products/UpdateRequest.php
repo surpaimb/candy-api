@@ -14,20 +14,20 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         $ruleset = [
-            'family_id' => 'hashid_is_valid:product_families',
+//            'family_id' => 'hashid_is_valid:product_families',
             'attributes' => 'required|array',
         ];
-
-        $attributes = app('api')->products()->getAttributes($this->product);
-        $defaultChannel = app('api')->channels()->getDefaultRecord();
-        $defaultLanguage = app('api')->languages()->getDefaultRecord();
-
-        foreach ($attributes as $attribute) {
-            if ($attribute->required) {
-                $rulestring = 'attributes.'.$attribute->handle.'.'.$defaultChannel->handle.'.'.$defaultLanguage->lang;
-                $ruleset[$rulestring] = 'required';
-            }
-        }
+// TODO::tuple 一定要全部更新？
+//        $attributes = app('api')->products()->getAttributes($this->product);
+//        $defaultChannel = app('api')->channels()->getDefaultRecord();
+//        $defaultLanguage = app('api')->languages()->getDefaultRecord();
+//
+//        foreach ($attributes as $attribute) {
+//            if ($attribute->required) {
+//                $rulestring = 'attributes.'.$attribute->handle.'.'.$defaultChannel->handle.'.'.$defaultLanguage->lang;
+//                $ruleset[$rulestring] = 'required';
+//            }
+//        }
 
         return $ruleset;
     }

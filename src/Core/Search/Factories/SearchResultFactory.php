@@ -106,7 +106,7 @@ class SearchResultFactory implements SearchResultInterface
      * Initialise the factory.
      *
      * @param ResultSet $results
-     * @return void
+     * @return $this
      */
     public function init(ResultSet $results)
     {
@@ -133,7 +133,7 @@ class SearchResultFactory implements SearchResultInterface
      * Set the model service.
      *
      * @param mixed $service
-     * @return void
+     * @return $this
      */
     public function service($service)
     {
@@ -146,7 +146,7 @@ class SearchResultFactory implements SearchResultInterface
      * Set the page.
      *
      * @param int $page
-     * @return void
+     * @return $this
      */
     public function page($page)
     {
@@ -159,7 +159,7 @@ class SearchResultFactory implements SearchResultInterface
      * Set the category.
      *
      * @param Category $category
-     * @return void
+     * @return $this
      */
     public function category($category)
     {
@@ -172,7 +172,7 @@ class SearchResultFactory implements SearchResultInterface
      * Set the current user.
      *
      * @param Model $user
-     * @return void
+     * @return $this
      */
     public function user($user)
     {
@@ -185,7 +185,7 @@ class SearchResultFactory implements SearchResultInterface
      * Set the transformer to use.
      *
      * @param mixed $transformer
-     * @return void
+     * @return $this
      */
     public function setTransformer($transformer = null)
     {
@@ -203,9 +203,9 @@ class SearchResultFactory implements SearchResultInterface
      * Parse the fractal includes.
      *
      * @param string $includes
-     * @return void
+     * @return $this
      */
-    public function include($includes = [])
+    public function includes($includes = [])
     {
         $this->fractal->parseIncludes($includes ?? []);
 
@@ -215,8 +215,8 @@ class SearchResultFactory implements SearchResultInterface
     /**
      * Set the search type.
      *
-     * @param string $type
-     * @return void
+     * @param $type
+     * @return $this
      */
     public function type($type)
     {
@@ -232,7 +232,7 @@ class SearchResultFactory implements SearchResultInterface
             'category_page' => (bool) $this->category,
             'pagination' => ['data' => $this->getPagination()],
             'aggregation' => ['data' => $this->getSearchAggregator()],
-            'suggestions' => $this->getSuggestions(),
+            'suggestions' => $this->getSuggestions($this->results),
         ];
     }
 
@@ -252,12 +252,11 @@ class SearchResultFactory implements SearchResultInterface
         return $this->fractal->createData($resource)->toArray();
     }
 
+
     /**
      * Maps the search sorting used to something we can use.
      *
-     * @param ResultSet $results
-     *
-     * @return array
+     * @return mixed|void
      */
     protected function getSort()
     {
@@ -300,7 +299,7 @@ class SearchResultFactory implements SearchResultInterface
      *
      * @return array
      */
-    protected function getSuggestions()
+    protected function getSuggestions($results)
     {
         $suggestions = [];
 
@@ -333,11 +332,10 @@ class SearchResultFactory implements SearchResultInterface
     }
 
     /**
+     *
      * Gets the aggregation fields for the results.
      *
-     * @param array $results
-     *
-     * @return void
+     * @return array
      */
     protected function getSearchAggregator()
     {

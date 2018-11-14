@@ -4,6 +4,7 @@ namespace GetCandy\Api\Core\Search\Providers\Elastic\Query;
 
 use Elastica\Query\DisMax;
 use Elastica\Query\MultiMatch;
+use Elastica\Query\Term as TermQuery;
 
 class Term
 {
@@ -43,6 +44,7 @@ class Term
         $disMaxQuery->setBoost(1.5);
         $disMaxQuery->setTieBreaker(1);
 
+
         if (! empty($this->fields['multi_match'])) {
             $multiMatch = $this->fields['multi_match'] ?? [];
 
@@ -62,6 +64,11 @@ class Term
                     $prev = $fields;
                 }
             }
+        }else{
+            // TODO::Add by Tuple
+            $query = new TermQuery();
+            $query->setTerm('name',$this->getText());
+            $disMaxQuery->addQuery($query);
         }
 
         return $disMaxQuery;

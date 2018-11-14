@@ -29,7 +29,7 @@ class CreateRequest extends FormRequest
             'variants.*' => 'in_stock',
             'variants.*.id' => 'required|hashid_is_valid:product_variants',
             'variants.*.quantity' => 'required|numeric|min:1|max:10000',
-            'basket_id' => 'hashid_is_valid:baskets',
+//            'basket_id' => 'hashid_is_valid:baskets',
         ];
 
         return $rules;

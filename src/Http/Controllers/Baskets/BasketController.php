@@ -67,6 +67,7 @@ class BasketController extends BaseController
     public function store(CreateRequest $request)
     {
         try {
+            dd('sssssss');
             $basket = app('api')->baskets()->store($request->all(), $request->user());
         } catch (\Illuminate\Database\QueryException $e) {
             return $this->errorUnprocessable(trans('getcandy::validation.max_qty'));

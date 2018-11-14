@@ -468,10 +468,10 @@ class SearchBuilder
 
     /**
      * Get the search query.
-     *
-     * @return void
+     * @param $rank
+     * @return Query
      */
-    public function getQuery($rank)
+    public function getBoolQuery($rank)
     {
         $query = new Query();
         $query->setParam('size', $this->limit);
@@ -494,7 +494,6 @@ class SearchBuilder
 
         // Set filters as post filters
         $postFilter = new BoolQuery;
-
         foreach ($this->filters as $filter) {
             if (! empty($filter['post'])) {
                 $postFilter->addFilter(
@@ -535,6 +534,47 @@ class SearchBuilder
                 $postFilter
             ));
         }
+
+        $query->setQuery($boolQuery);
+
+        $query->setHighlight(
+            $this->highlight()
+        );
+
+        foreach ($this->sorts as $sort) {
+            $query->addSort($sort->getMapping(
+                $this->user
+            ));
+        }
+
+        return $query;
+    }
+
+    /**
+     * Get the search query.
+     * @param $rank
+     * @return Query
+     */
+    public function getQuery($rank)
+    {
+        $query = new Query();
+        $query->setParam('size', $this->limit);
+        $query->setParam('from', $this->offset);
+
+        $boolQuery = new BoolQuery;
+
+        if ($this->term) {
+            $boolQuery->addMust(
+                $this->term->getQuery()
+            );
+            $query->setSuggest(
+                $this->getSuggest()
+            );
+        }
+
+        $query->setSource(
+            $this->getExcludedFields()
+        );
 
         $query->setQuery($boolQuery);
 

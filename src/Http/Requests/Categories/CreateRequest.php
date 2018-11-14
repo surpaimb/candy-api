@@ -26,7 +26,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'attributes.*.value' => 'required|unique_category_attribute:name',
+//            'attributes.*.value' => 'required|unique_category_attribute:name',
             'url' => 'required|unique_route',
         ];
     }

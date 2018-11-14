@@ -26,14 +26,16 @@ class ProductType extends BaseType
         ],
         'description' => [
             'type' => 'text',
-            'analyzer' => 'standard',
+            "analyzer"=> "ik_max_word",
+            "search_analyzer"=> "ik_max_word",
         ],
         'popularity' => [
             'type' => 'integer',
         ],
         'sku' => [
             'type' => 'text',
-            'analyzer' => 'standard',
+            "analyzer"=> "ik_max_word",
+            "search_analyzer"=> "ik_max_word",
             'fields' => [
                 'suggest' => [
                     'type' => 'completion',
@@ -64,6 +66,8 @@ class ProductType extends BaseType
                 ],
                 'name' => [
                     'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
                 'handle' => [
                     'type' => 'keyword',
@@ -80,6 +84,8 @@ class ProductType extends BaseType
                 ],
                 'name' => [
                     'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
                 'handle' => [
                     'type' => 'keyword',
@@ -96,6 +102,8 @@ class ProductType extends BaseType
                 ],
                 'name' => [
                     'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
                 'max' => [
                     'type' => 'scaled_float',
@@ -117,17 +125,24 @@ class ProductType extends BaseType
         ],
         'breadcrumbs' => [
             'type' => 'text',
-            'analyzer' => 'standard',
+            'analyzer' => 'ik_max_word',
+            "search_analyzer"=> "ik_max_word",
             'fields' => [
                 'en' => [
                     'type' => 'text',
                     'analyzer' => 'english',
                 ],
+                'zh' => [
+                    'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
+                ],
             ],
         ],
         'name' => [
             'type' => 'text',
-            'analyzer' => 'standard',
+            'analyzer' => 'ik_max_word',
+            "search_analyzer"=> "ik_max_word",
             'fields' => [
                 'sortable' => [
                     'type' => 'keyword',
@@ -138,6 +153,11 @@ class ProductType extends BaseType
                 'en' => [
                     'type' => 'text',
                     'analyzer' => 'english',
+                ],
+                'zh' => [
+                    'type' => 'text',
+                    "analyzer"=> "ik_max_word",
+                    "search_analyzer"=> "ik_max_word",
                 ],
                 'trigram' => [
                     'type' => 'text',

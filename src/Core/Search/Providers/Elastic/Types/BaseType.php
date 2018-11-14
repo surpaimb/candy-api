@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class BaseType
 {
     protected $suffix = null;
+    protected $handle = null;
 
     public function setSuffix($suffix)
     {
@@ -34,9 +35,8 @@ abstract class BaseType
 
     /**
      * Gets a collection of indexables, based on a model.
-     *
-     * @param [type] $product
-     * @return void
+     * @param Model $model
+     * @return \Illuminate\Support\Collection
      */
     protected function getIndexables(Model $model)
     {
@@ -157,9 +157,8 @@ abstract class BaseType
 
     /**
      * Gets any attributes which are marked as searchable.
-     *
      * @param Model $model
-     * @return void
+     * @return mixed
      */
     protected function getIndexableAttributes(Model $model)
     {
@@ -253,7 +252,7 @@ abstract class BaseType
                 } else {
                     $data = [
                         'type' => 'text',
-                        'analyzer' => 'standard',
+                        'analyzer' => 'ik_max_word',
                     ];
                 }
                 $payload[$attribute->handle] = $data;

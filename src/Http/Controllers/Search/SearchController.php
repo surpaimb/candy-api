@@ -19,6 +19,7 @@ class SearchController extends BaseController
      * @var ChannelService
      */
     protected $channels;
+    protected $categories;
 
     public function __construct(ChannelService $channels, CategoryService $categories)
     {
@@ -29,10 +30,9 @@ class SearchController extends BaseController
     /**
      * Performs a search against a type.
      *
-     * @param Request $request
-     * @param SearchContract $client
-     *
-     * @return array
+     * @param SearchRequest $request
+     * @param SearchContract $search
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function search(SearchRequest $request, SearchContract $search)
     {
@@ -59,6 +59,7 @@ class SearchController extends BaseController
         $filterable[] = 'price';
 
         try {
+
             $results = $search
                 ->client()
                 ->language(app()->getLocale())
@@ -71,12 +72,12 @@ class SearchController extends BaseController
                 ->pagination($page ?: 1, $request->per_page ?: 30)
                 ->keywords($request->keywords)
                 ->search((bool) $request->get('rank', true));
+
         } catch (\Elastica\Exception\Connection\HttpException $e) {
             return $this->errorInternalError($e->getMessage());
         } catch (\Elastica\Exception\ResponseException $e) {
             return $this->errorInternalError($e->getMessage());
         }
-
         $results = app('api')->search()->getResults(
             $results,
             $request->type,

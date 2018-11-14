@@ -56,7 +56,7 @@ class SearchService
         $service = $type == 'product' ? $this->products : $this->categories;
 
         return $this->factory
-            ->include($includes)
+            ->includes($includes)
             ->type($type)
             ->page($page)
             ->service($service)

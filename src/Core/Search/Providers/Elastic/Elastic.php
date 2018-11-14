@@ -17,16 +17,27 @@ class Elastic implements SearchContract
         $this->indexer = $indexer;
     }
 
+    /**
+     *
+     * @return Indexer
+     */
     public function indexer()
     {
         return $this->indexer;
     }
 
+    /**
+     *
+     * @return Search
+     */
     public function client()
     {
         return $this->client;
     }
 
+    /**
+     * @return ProductType|mixed
+     */
     public function products()
     {
         return app()->make(ProductType::class);

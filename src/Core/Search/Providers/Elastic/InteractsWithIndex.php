@@ -25,7 +25,7 @@ trait InteractsWithIndex
 
     protected $client;
 
-    protected $lang = 'en';
+    protected $lang = 'zh';
 
     /**
      * Gets the base index name.
@@ -114,9 +114,10 @@ trait InteractsWithIndex
     }
 
     /**
+     *
      * Updates the mappings for the model.
-     * @param  Elastica\Index $index
-     * @return void
+     *
+     * @param $index
      */
     public function updateMappings($index)
     {

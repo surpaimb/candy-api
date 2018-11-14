@@ -4,7 +4,7 @@ namespace GetCandy\Api\Core\Languages\Services;
 
 use GetCandy\Api\Core\Scaffold\BaseService;
 use GetCandy\Api\Core\Languages\Models\Language;
-use GetCandy\Exceptions\MinimumRecordRequiredException;
+use GetCandy\Api\Exceptions\MinimumRecordRequiredException;
 
 class LanguageService extends BaseService
 {
@@ -15,10 +15,8 @@ class LanguageService extends BaseService
 
     /**
      * Creates a resource from the given data.
-     *
-     * @param  array  $data
-     *
-     * @return GetCandy\Api\Core\Models\Language
+     * @param $data
+     * @return Language
      */
     public function create($data)
     {

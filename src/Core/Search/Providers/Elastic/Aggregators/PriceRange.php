@@ -9,13 +9,14 @@ class PriceRange extends AbstractAggregator
 {
     /**
      * Get the pre aggregation.
-     *
-     * @param Search $search
-     * @param Query $query
-     * @return Query
+     * @param Search|null $search
+     * @param null $query
+     * @param null $postFilter
+     * @return Range
      */
     public function getPre(Search $search = null, $query = null, $postFilter = null)
     {
+
         // Add max price aggregator
         $max = new MaxPrice;
 
@@ -30,12 +31,13 @@ class PriceRange extends AbstractAggregator
         $query->setQuery($boolQuery);
         $query->addAggregation($max->getPre());
 
+
         $results = $search->setQuery($query)->search();
 
         $max = floor($results->getAggregation('max_price')['value']);
-
         // Get the config range filter.
         $definedRanges = collect(config('getcandy.search.aggregation.price.ranges', []));
+
 
         $ranges = $definedRanges->first(function ($range) use ($max) {
             if ($max < last($range)) {
@@ -52,11 +54,13 @@ class PriceRange extends AbstractAggregator
 
         // Add our first range as being zero to the first one.
         $rangeQuery->addRange(0, array_first($ranges) - 1);
-        foreach ($ranges as $index => $range) {
-            $next = $ranges[$index + 1] ?? null;
-            $rangeQuery->addRange($range, $next ? $next - 1 : null);
+        if($ranges){
+            //
+            foreach ($ranges as $index => $range) {
+                $next = $ranges[$index + 1] ?? null;
+                $rangeQuery->addRange($range, $next ? $next - 1 : null);
+            }
         }
-
         return $rangeQuery;
     }
 }
