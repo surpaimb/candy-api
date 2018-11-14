@@ -34,7 +34,7 @@ class PaymentService extends BaseService
     /**
      * Gets the payment provider class.
      *
-     * @return void
+     * @return mixed
      */
     public function getProvider()
     {
@@ -93,12 +93,14 @@ class PaymentService extends BaseService
 
     /**
      * Process an order for payment.
-     *
-     * @param Order $order
-     * @param string $token
-     * @param mixed $type
+     * @param $order
+     * @param $token
+     * @param null $type
      * @param array $fields
-     * @return void
+     * @return mixed
+     * @throws InvalidPaymentTokenException
+     * @throws OrderAlreadyProcessedException
+     * @throws ThreeDSecureRequiredException
      */
     public function process($order, $token, $type = null, $fields = [])
     {

@@ -421,12 +421,9 @@ class OrderService extends BaseService
 
     /**
      * Sets the fields for contact info on the order.
-     *
-     * @param string $order
-     * @param array $fields
-     * @param string $prefix
-     *
-     * @return void
+     * @param $order
+     * @param $fields
+     * @param $prefix
      */
     protected function setFields($order, $fields, $prefix)
     {
@@ -442,7 +439,7 @@ class OrderService extends BaseService
      *
      * @param string $orderId
      *
-     * @return void
+     * @return bool
      */
     public function expire($orderId)
     {
@@ -503,10 +500,8 @@ class OrderService extends BaseService
 
     /**
      * Syncs a given basket with its order.
-     *
      * @param Order $order
      * @param Basket $basket
-     *
      * @return Order
      */
     public function syncWithBasket(Order $order, Basket $basket)
@@ -528,11 +523,11 @@ class OrderService extends BaseService
     }
 
     /**
+     *
      * Maps the order lines from a basket.
      *
-     * @param Basket $basket
-     *
-     * @return void
+     * @param $basket
+     * @return array
      */
     protected function mapOrderLines($basket)
     {
@@ -572,9 +567,7 @@ class OrderService extends BaseService
 
     /**
      * Checks whether an order is processable.
-     *
      * @param Order $order
-     *
      * @return bool
      */
     protected function isProcessable(Order $order)
@@ -624,9 +617,10 @@ class OrderService extends BaseService
     /**
      * Handles the response from an order being processed.
      *
-     * @param Transaction $transaction
-     * @param Order $order
-     * @return void
+     * @param $transaction
+     * @param $order
+     * @param null $type
+     * @return mixed
      */
     protected function handleProcessResponse($transaction, $order, $type = null)
     {
@@ -664,12 +658,10 @@ class OrderService extends BaseService
 
     /**
      * Process a 3DSecured transaction.
-     *
-     * @param Order $order
-     * @param string $transactionId
-     * @param string $paRes
-     * @param string $type
-     * @return Order
+     * @param $order
+     * @param $transactionId
+     * @param $paRes
+     * @param null $type
      */
     public function processThreeDSecure($order, $transactionId, $paRes, $type = null)
     {

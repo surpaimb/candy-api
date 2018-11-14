@@ -61,11 +61,11 @@ class OrderController extends BaseController
     }
 
     /**
+     *
      * Store either a new or existing basket.
      *
      * @param CreateRequest $request
-     *
-     * @return void
+     * @return array|\Illuminate\Http\Response
      */
     public function store(CreateRequest $request)
     {

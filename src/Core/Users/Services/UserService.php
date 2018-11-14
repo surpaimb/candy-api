@@ -21,10 +21,11 @@ class UserService extends BaseService implements UserContract
     }
 
     /**
+     *
      * Returns model by a given hashed id.
-     * @param  string $id
-     * @throws  Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return Illuminate\Database\Eloquent\Model
+     *
+     * @param string $id
+     * @return mixed
      */
     public function getByHashedId($id)
     {
@@ -40,9 +41,12 @@ class UserService extends BaseService implements UserContract
 
     /**
      * Gets paginated data for the record.
-     * @param  int $length How many results per page
-     * @param  int  $page   The page to start
-     * @return Illuminate\Pagination\LengthAwarePaginator
+     *
+     * @param int $length
+     * @param null $page
+     * @param null $keywords
+     * @param array $ids
+     * @return mixed
      */
     public function getPaginatedData($length = 50, $page = null, $keywords = null, $ids = [])
     {
@@ -66,9 +70,8 @@ class UserService extends BaseService implements UserContract
     /**
      * Creates a resource from the given data.
      *
-     * @param  array  $data
-     *
-     * @return GetCandy\Api\Core\Auth\Models\User
+     * @param $data
+     * @return mixed
      */
     public function create($data)
     {

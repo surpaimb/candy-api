@@ -24,9 +24,8 @@ abstract class BaseService
 
     /**
      * Returns model by a given hashed id.
-     * @param  string $id
-     * @throws  Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return Illuminate\Database\Eloquent\Model
+     * @param $id
+     * @return mixed
      */
     public function getByHashedId($id)
     {
@@ -37,8 +36,8 @@ abstract class BaseService
 
     /**
      * Get a collection of models from given Hashed IDs.
-     * @param  array  $ids
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param array $ids
+     * @return mixed
      */
     public function getByHashedIds(array $ids)
     {

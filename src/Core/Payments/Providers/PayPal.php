@@ -78,9 +78,9 @@ class PayPal extends AbstractProvider
 
         if (! $success) {
             $response = new PaymentResponse(false, 'Unable to process order');
-            $response->transaction = $transactions->first(function ($t) {
+            $response->transaction($transactions->first(function ($t) {
                 return ! $t->success;
-            });
+            }));
 
             return $response;
         }
@@ -94,9 +94,7 @@ class PayPal extends AbstractProvider
     /**
      * Create a successful transaction.
      *
-     * @param [type] $content
-     * @param [type] $order
-     * @return void
+     * @return \Illuminate\Support\Collection
      */
     protected function getTransactions()
     {
