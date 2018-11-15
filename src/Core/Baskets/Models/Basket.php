@@ -46,8 +46,7 @@ class Basket extends BaseModel
 
     /**
      * Get the basket lines.
-     *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function lines()
     {
@@ -66,8 +65,7 @@ class Basket extends BaseModel
 
     /**
      * Get the basket user.
-     *
-     * @return User
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {

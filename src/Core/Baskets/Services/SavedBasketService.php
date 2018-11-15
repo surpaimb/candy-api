@@ -17,10 +17,9 @@ class SavedBasketService extends BaseService
 
     /**
      * Update a saved basket.
-     *
-     * @param string $id
-     * @param array $payload
-     * @return void
+     * @param string $hashedId
+     * @param array $data
+     * @return mixed
      */
     public function update($hashedId, array $data)
     {

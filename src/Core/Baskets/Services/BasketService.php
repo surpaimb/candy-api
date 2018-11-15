@@ -23,7 +23,7 @@ class BasketService extends BaseService
     /**
      * The basket factory.
      *
-     * @var BasketFactoryInterface
+     * @var BasketInterface
      */
     protected $factory;
 
@@ -76,9 +76,8 @@ class BasketService extends BaseService
 
     /**
      * Get a basket by it's hashed ID.
-     *
-     * @param string $id
-     * @return BasketFactory
+     * @param $id
+     * @return mixed
      */
     public function getByHashedId($id)
     {
@@ -111,9 +110,8 @@ class BasketService extends BaseService
     /**
      * Detach a user from a basket.
      *
-     * @param string $basketId
-     *
-     * @return Basket
+     * @param $basketId
+     * @return BasketFactory
      */
     public function removeUser($basketId)
     {
@@ -220,9 +218,8 @@ class BasketService extends BaseService
 
     /**
      * Get a users saved baskets.
-     *
-     * @param mixed $user
-     * @return void
+     * @param $user
+     * @return mixed
      */
     public function getSaved($user)
     {
@@ -270,10 +267,9 @@ class BasketService extends BaseService
 
     /**
      * Delete a discount.
-     *
-     * @param string $basketId
-     * @param string $discountId
-     * @return void
+     * @param $basketId
+     * @param $discountId
+     * @return mixed
      */
     public function deleteDiscount($basketId, $discountId)
     {
@@ -289,15 +285,12 @@ class BasketService extends BaseService
 
     /**
      * Get a basket for a user.
-     *
-     * @param mixed $user
-     *
-     * @return mixed
+     * @param BasketInterface|null
      */
     public function getCurrentForUser($user)
     {
         if (! $user) {
-            return;
+            return null;
         }
 
         if (is_string($user)) {

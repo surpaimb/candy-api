@@ -106,6 +106,9 @@ class OrderService extends BaseService
 
         $order->discount_total = $order->lines()->sum('discount_total');
 
+        //TODO:: Add delete baskets
+//        app('api')->baskets()->destroy($basketId);
+
         event(new OrderSavedEvent($order, $basket));
 
         return $order;
@@ -680,11 +683,15 @@ class OrderService extends BaseService
 
     /**
      * Get paginated orders.
-     *
      * @param int $length
      * @param int $page
-     * @param User $user
-     * @return void
+     * @param null $user
+     * @param null $status
+     * @param null $keywords
+     * @param array $dates
+     * @param null $zone
+     * @param null $type
+     * @return mixed
      */
     public function getPaginatedData($length = 50, $page = 1, $user = null, $status = null, $keywords = null, $dates = [], $zone = null, $type = null)
     {

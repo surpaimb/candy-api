@@ -2,6 +2,7 @@
 
 namespace GetCandy\Api\Core\Search\Providers\Elastic\Query;
 
+use Log;
 use Elastica\Query\DisMax;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Term as TermQuery;
@@ -70,6 +71,7 @@ class Term
             $query->setTerm('name',$this->getText());
             $disMaxQuery->addQuery($query);
         }
+        Log::Info('Term Query',[$disMaxQuery->toArray()]);
 
         return $disMaxQuery;
     }

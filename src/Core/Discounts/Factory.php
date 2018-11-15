@@ -25,11 +25,11 @@ class Factory
 
     /**
      * Checks the criteria.
-     *
-     * @param Discount $discount
-     * @param mixed $uesr
-     * @param Basket $basket
-     * @return void
+     * @param $discount
+     * @param null $user
+     * @param null $basket
+     * @param null $product
+     * @return bool
      */
     public function checkCriteria($discount, $user = null, $basket = null, $product = null)
     {

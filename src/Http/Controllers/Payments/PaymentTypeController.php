@@ -10,7 +10,6 @@ class PaymentTypeController extends BaseController
     public function index()
     {
         $types = app('api')->paymentTypes()->all();
-
         return $this->respondWithCollection($types, new PaymentTypeTransformer);
     }
 }
