@@ -38,7 +38,10 @@ class CreateRequest extends FormRequest
     public function messages()
     {
         return [
+            'varinats' => trans('getcandy::validation.unique_lines'),
+            'varinats.*' => trans('getcandy::validation.*'),
             'variants.*.quantity.max' => trans('getcandy::validation.max_qty'),
+            'variants.*.quantity.min' => trans('getcandy::validation.min_qty'),
         ];
     }
 }

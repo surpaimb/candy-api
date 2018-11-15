@@ -18,7 +18,8 @@ class BasketController extends BaseController
 {
     /**
      * Returns a listing of channels.
-     * @return Json
+     * @param Request $request
+     * @return array
      */
     public function index(Request $request)
     {
@@ -29,8 +30,8 @@ class BasketController extends BaseController
 
     /**
      * Handles the request to show a channel based on it's hashed ID.
-     * @param  string $id
-     * @return Json
+     * @param $id
+     * @return array|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -59,17 +60,15 @@ class BasketController extends BaseController
 
     /**
      * Store either a new or existing basket.
-     *
      * @param CreateRequest $request
-     *
-     * @return void
+     * @return array
      */
     public function store(CreateRequest $request)
     {
         try {
             $basket = app('api')->baskets()->store($request->all(), $request->user());
         } catch (\Illuminate\Database\QueryException $e) {
-            return $this->errorUnprocessable(trans('getcandy::validation.max_qty'));
+            return $this->errorUnprocessable(trans('getcandy::validation.min_qty'));
         }
 
         return $this->respondWithItem($basket, new BasketTransformer);
@@ -79,7 +78,7 @@ class BasketController extends BaseController
      * Saves a basket to a users account.
      *
      * @param Request $request
-     * @return void
+     * @return array
      */
     public function save($id, SaveRequest $request)
     {
@@ -92,7 +91,7 @@ class BasketController extends BaseController
      * Handle the request to get a users saved baskets.
      *
      * @param Request $request
-     * @return void
+     * @return array
      */
     public function saved(Request $request)
     {
@@ -103,10 +102,9 @@ class BasketController extends BaseController
 
     /**
      * Handle the request to delete a basket.
-     *
-     * @param string $id
+     * @param $id
      * @param DeleteRequest $request
-     * @return void
+     * @return array
      */
     public function destroy($id, DeleteRequest $request)
     {
@@ -117,10 +115,9 @@ class BasketController extends BaseController
 
     /**
      * Associate a user to a basket request.
-     *
+     * @param $basketId
      * @param PutUserRequest $request
-     *
-     * @return void
+     * @return array|\Illuminate\Http\Response
      */
     public function putUser($basketId, PutUserRequest $request)
     {
@@ -146,9 +143,8 @@ class BasketController extends BaseController
 
     /**
      * Gets the basket for the current user.
-     *
      * @param Request $request
-     * @return void
+     * @return array|\Illuminate\Http\Response
      */
     public function current(Request $request)
     {
@@ -162,9 +158,8 @@ class BasketController extends BaseController
 
     /**
      * Handle the request to resolve a users basket.
-     *
      * @param Request $request
-     * @return void
+     * @return array
      */
     public function resolve(Request $request)
     {

@@ -219,7 +219,7 @@ abstract class BaseModel extends Model implements BaseModelEventsInterface
      */
     public function getNowUTCTime()
     {
-        return Carbon::now('UTC');
+        return Carbon::now('PRC');
     }
 
     /**
@@ -276,7 +276,7 @@ abstract class BaseModel extends Model implements BaseModelEventsInterface
         if ($this->timestamp_always_save_in_utc) {
             // set to UTC only if Carbon
             if ($value instanceof Carbon) {
-                $value->setTimezone('UTC');
+                $value->setTimezone('PRC');
             }
         }
 
