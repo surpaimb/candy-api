@@ -38,13 +38,13 @@ trait BaseModelEvents
     public function onCreating()
     {
 
-        // auto set user id
-        if ($this->autoUserId && empty($this->user_id)) {
-            $user_id = $this->getAuthUserId();
-            if ($user_id > 0) {
-                $this->user_id = $user_id;
-            }
-        }
+//        // auto set user id
+//        if ($this->autoUserId && empty($this->user_id)) {
+//            $user_id = $this->getAuthUserId();
+//            if ($user_id > 0) {
+//                $this->user_id = $user_id;
+//            }
+//        }
 
     }
 
